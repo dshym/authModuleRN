@@ -1,4 +1,10 @@
-import {AUTHENTICATE, LOGOUT, SET_ERROR, SET_LOADING} from './authActionTypes';
+import {
+  AUTHENTICATE,
+  LOGOUT,
+  SET_ERROR,
+  SET_LOADING,
+  REFRESH_TOKEN,
+} from './authActionTypes';
 
 //for auth we use authInstance, but for another requests we can use
 //useAxios hook with defined interceptor for updating token
@@ -15,6 +21,13 @@ export const setError = error => {
 export const setLoading = () => {
   return {
     type: SET_LOADING,
+  };
+};
+
+export const refreshToken = newToken => {
+  return {
+    type: REFRESH_TOKEN,
+    newToken,
   };
 };
 

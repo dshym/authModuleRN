@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "281241925898",
+    "project_id": "authmodulern",
+    "storage_bucket": "authmodulern.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281241925898:android:59dec7d5081495c937e2f3",
+        "android_client_info": {
+          "package_name": "com.authmodulern"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281241925898-3eg4ht22fud9240jgpqhk6al5r00rttd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.authmodulern",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "281241925898-a5f2ep7gqn9dcjecj3cfv9dvieahpqih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoO3o4sr4YUtuFArRlDD2TCLBcDFjovWI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281241925898-a5f2ep7gqn9dcjecj3cfv9dvieahpqih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

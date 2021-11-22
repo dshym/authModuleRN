@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -11,15 +11,65 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import Divider from '../components/Divider';
 
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {firebaseConfig} from '../firebaseConfig';
+
+import {useDispatch} from 'react-redux';
+import * as authActions from '../store/actions/auth';
+
+import Divider from '../components/Divider';
 import AuthForm from '../components/AuthForm';
 
 //use useWindowDimensions hook or addListener, for handling landscape mode
 //not implemented due to task specifications (was not required)
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
+GoogleSignin.configure({
+  webClientId: firebaseConfig.webClientId,
+});
+
 const AuthScreen = () => {
+  const dispatch = useDispatch();
+
+  const onAuthStateChanged = async user => {
+    if (user) {
+      const userData = {
+        email: user.email,
+        password: '',
+      };
+      try {
+        const idTokenResult = await auth().currentUser.getIdTokenResult();
+        const expirationDate = new Date(idTokenResult.expirationTime);
+        dispatch(
+          authActions.authenticate(
+            idTokenResult.token,
+            expirationDate,
+            userData,
+          ),
+        );
+      } catch (error) {
+        throw new Error('Failed to fetch token');
+      }
+    }
+  };
+
+  const signinWithGoogle = async () => {
+    try {
+      const {idToken} = await GoogleSignin.signIn();
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      return auth().signInWithCredential(googleCredential);
+    } catch (error) {
+      throw new Error('Failed to sign in with Google');
+    }
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <ScrollView style={styles.screen}>
@@ -34,7 +84,9 @@ const AuthScreen = () => {
             <TouchableOpacity style={styles.facebookButton}>
               <Text style={styles.facebookText}>Facebook</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.googleButton}>
+            <TouchableOpacity
+              style={styles.googleButton}
+              onPress={signinWithGoogle}>
               <Text style={styles.googleText}>Google</Text>
             </TouchableOpacity>
           </View>

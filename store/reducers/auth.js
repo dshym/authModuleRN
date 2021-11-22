@@ -3,6 +3,7 @@ import {
   LOGOUT,
   SET_LOADING,
   SET_ERROR,
+  REFRESH_TOKEN,
 } from '../actions/authActionTypes';
 
 const initialState = {
@@ -21,6 +22,11 @@ export default (state = initialState, action) => {
         token: action.token,
         expirationDate: action.expirationDate,
         error: null,
+      };
+    case REFRESH_TOKEN:
+      return {
+        ...state,
+        token: action.newToken,
       };
     case SET_LOADING:
       return {
