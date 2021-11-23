@@ -6,7 +6,6 @@ import {useSelector} from 'react-redux';
 
 import AuthScreen from '../screens/AuthScreen';
 import LogoutScreen from '../screens/LogoutScreen';
-import ErrorScreen from '../screens/ErrorScreen';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const {height: SCREEN_HEIGHT} = Dimensions.get('window');
@@ -14,11 +13,11 @@ const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
-  const state = useSelector(state => state);
+  const {token} = useSelector(state => state);
 
   return (
     <Stack.Navigator>
-      {state.token == null ? (
+      {token == null ? (
         <>
           <Stack.Screen
             name="Auth"
@@ -36,11 +35,6 @@ const MainNavigator = () => {
               title: '',
               headerShadowVisible: false,
             }}
-          />
-          <Stack.Screen
-            name="Error"
-            component={ErrorScreen}
-            options={{headerShown: false}}
           />
         </>
       ) : (

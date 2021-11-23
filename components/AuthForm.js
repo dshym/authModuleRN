@@ -8,7 +8,6 @@ import {
   Dimensions,
   Alert,
   ActivityIndicator,
-  ScrollView,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import * as authActions from '../store/actions/auth';

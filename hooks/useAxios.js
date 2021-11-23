@@ -5,8 +5,9 @@ import auth from '@react-native-firebase/auth';
 
 const baseURL = 'https://site.ualegion.com/api/v1/';
 
+//hook for requests with token validity check
 const useAxios = () => {
-  const {expirationDate, userData, token} = useSelector(state => state);
+  const {expirationDate, userData} = useSelector(state => state);
 
   const dispatch = useDispatch();
 
@@ -17,15 +18,12 @@ const useAxios = () => {
 
   axiosInstance.interceptors.request.use(async req => {
     if (expirationDate) {
-      console.log('interceptor');
-
       if (expirationDate.getTime() < new Date().getTime()) {
         //additionally we can add redux state to handle auth method
+        //and detect which token to update
         if (userData.password && userData.email) {
           dispatch(authActions.login(userData.email, userData.password));
         } else {
-          console.log('google auth');
-
           try {
             //due to firebase documentation: Returns the current token if it has not expired.
             //Otherwise, this will refresh the token and return a new one.
