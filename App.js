@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import MainNavigator from './navigation/MainNavigator';
+import MainNavigator from './src/navigation/MainNavigator';
 import ReduxThunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import ErrorBoundary from './errorBoundaries/ErrorBoundary';
-import authReducer from './store/reducers/auth';
+import ErrorBoundary from './src/errorBoundaries/ErrorBoundary';
+import authReducer from './src/store/reducers/auth';
 
 const store = createStore(authReducer, applyMiddleware(ReduxThunk));
 
