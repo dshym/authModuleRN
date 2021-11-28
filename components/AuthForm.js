@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
@@ -18,24 +18,30 @@ const {height: SCREEN_HEIGHT} = Dimensions.get('window');
 const AuthForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [badEmail, setBadEmail] = useState(false);
+  const [badPassword, setBadPassword] = useState(false);
   const loading = useSelector(state => state.loading);
   const error = useSelector(state => state.error);
+
+  const secondInputRef = useRef();
 
   const dispatch = useDispatch();
 
   const submitHandler = () => {
     if (!validateEmail(email)) {
-      Alert.alert(
-        'Неправильна поштова скринька',
-        'Формат поштової скриньки: example@example.com',
-        [{text: 'OK', onPress: () => setEmail('')}],
-      );
+      setBadEmail(true);
+      // Alert.alert(
+      //   'Неправильна поштова скринька',
+      //   'Формат поштової скриньки: example@example.com',
+      //   [{text: 'OK', onPress: () => setEmail('')}],
+      // );
       return;
     }
     if (password.trim().length < 5) {
-      Alert.alert('Короткий пароль', 'Мінімальна довжина паролю 5 знаків', [
-        {text: 'OK', onPress: () => setPassword('')},
-      ]);
+      // Alert.alert('Короткий пароль', 'Мінімальна довжина паролю 5 знаків', [
+      //   {text: 'OK', onPress: () => setPassword('')},
+      // ]);
+      setBadPassword(true);
       return;
     }
     dispatch(authActions.login(email, password));
@@ -50,17 +56,27 @@ const AuthForm = () => {
   return (
     <View style={styles.formContainer}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, badEmail ? styles.inpurError : null]}
         value={email}
         placeholder="Поштова скринька"
         onChangeText={text => setEmail(text)}
         keyboardType="email-address"
+        caretHidden={false}
+        returnKeyType="next"
+        blurOnSubmit={false}
+        onFocus={() => setBadEmail(false)}
+        onSubmitEditing={() => {
+          secondInputRef.current.focus();
+        }}
       />
       <TextInput
-        style={styles.input}
+        style={[styles.input, badPassword ? styles.inpurError : null]}
         value={password}
         placeholder="Пароль"
         onChangeText={text => setPassword(text)}
+        onFocus={() => setBadPassword(false)}
+        caretHidden={false}
+        ref={secondInputRef}
       />
       <TouchableOpacity style={styles.forgotPasswordContainer}>
         <Text style={styles.forgotPasswordText}>Забули пароль?</Text>
@@ -87,6 +103,9 @@ const styles = StyleSheet.create({
     borderBottomColor: '#d4d4d4',
     borderBottomWidth: 1,
     marginTop: SCREEN_HEIGHT < 600 ? 10 : 20,
+  },
+  inpurError: {
+    borderBottomColor: '#ff9891',
   },
   forgotPasswordContainer: {
     flex: 1,
