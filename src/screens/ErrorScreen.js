@@ -1,5 +1,8 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+
+import {styles} from './ErrorScreenStyles';
+
 import {useDispatch} from 'react-redux';
 import * as authActions from '../store/actions/auth';
 
@@ -19,20 +22,5 @@ const ErrorScreen = ({error}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-  },
-  button: {
-    width: '30%',
-    alignItems: 'center',
-    backgroundColor: '#3b5998',
-    padding: 10,
-    borderRadius: 5,
-  },
-});
 
 export default ErrorScreen;

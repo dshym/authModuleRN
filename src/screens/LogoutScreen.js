@@ -1,5 +1,7 @@
 import React from 'react';
-import {View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
+
+import {styles} from './LogoutScreenStyles';
 
 import auth from '@react-native-firebase/auth';
 
@@ -28,25 +30,5 @@ const LogoutScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  button: {
-    width: '40%',
-    alignItems: 'center',
-    backgroundColor: 'tomato',
-    padding: 10,
-    borderRadius: 20,
-  },
-  text: {
-    color: 'white',
-    fontWeight: '700',
-  },
-});
 
 export default LogoutScreen;

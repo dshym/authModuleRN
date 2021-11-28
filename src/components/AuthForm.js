@@ -2,10 +2,8 @@ import React, {useState, useRef} from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
-  Dimensions,
   Alert,
   ActivityIndicator,
 } from 'react-native';
@@ -13,7 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import {validateEmail} from '../utils/validateEmail';
 
-const {height: SCREEN_HEIGHT} = Dimensions.get('window');
+import {styles} from './AuthFormStyles';
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -91,43 +89,5 @@ const AuthForm = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  formContainer: {
-    flex: 1,
-    alignItems: 'center',
-    marginVertical: 0,
-  },
-  input: {
-    width: '90%',
-    borderBottomColor: '#d4d4d4',
-    borderBottomWidth: 1,
-    marginTop: SCREEN_HEIGHT < 600 ? 10 : 20,
-  },
-  inpurError: {
-    borderBottomColor: '#ff9891',
-  },
-  forgotPasswordContainer: {
-    flex: 1,
-    margin: SCREEN_HEIGHT < 600 ? 10 : 20,
-    alignItems: 'center',
-  },
-  forgotPasswordText: {
-    color: '#17c1ff',
-    fontWeight: '700',
-  },
-  submitButton: {
-    width: '90%',
-    alignItems: 'center',
-    backgroundColor: '#17c1ff',
-    padding: 15,
-    borderRadius: 30,
-    margin: SCREEN_HEIGHT < 600 ? 10 : 30,
-  },
-  submitText: {
-    color: 'white',
-    fontWeight: '700',
-  },
-});
 
 export default AuthForm;

@@ -1,5 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text} from 'react-native';
+
+import {styles} from './DividerStyles';
 
 const Divider = props => {
   return (
@@ -12,23 +14,5 @@ const Divider = props => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  divider: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-  dividerLine: {
-    width: '20%',
-    height: 1,
-    backgroundColor: '#d4d4d4',
-  },
-  dividerText: {
-    width: 50,
-    textAlign: 'center',
-  },
-});
 
 export default Divider;
