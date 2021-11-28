@@ -15,7 +15,7 @@ import {
 
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {firebaseConfig} from '../firebaseConfig';
+import {WebClientId} from '@env';
 
 import {useDispatch} from 'react-redux';
 import * as authActions from '../store/actions/auth';
@@ -28,7 +28,7 @@ import AuthForm from '../components/AuthForm';
 const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Dimensions.get('window');
 
 GoogleSignin.configure({
-  webClientId: firebaseConfig.webClientId,
+  webClientId: WebClientId,
 });
 
 const AuthScreen = () => {
