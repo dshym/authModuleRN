@@ -10,6 +10,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
@@ -50,7 +51,12 @@ const AuthScreen = () => {
           ),
         );
       } catch (error) {
-        throw new Error('Failed to fetch token');
+        Alert.alert(
+          'Помилка при отриманні токену',
+          `${JSON.stringify(error)}`,
+          [{text: 'OK', onPress: () => {}}],
+        );
+        //throw new Error('Failed to fetch token');
       }
     }
   };
@@ -61,7 +67,10 @@ const AuthScreen = () => {
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       return auth().signInWithCredential(googleCredential);
     } catch (error) {
-      throw new Error('Failed to sign in with Google');
+      Alert.alert('Помилка', `${JSON.stringify(error)}`, [
+        {text: 'OK', onPress: () => {}},
+      ]);
+      //throw new Error('Failed to sign in with Google');
     }
   };
 
