@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './navigation/MainNavigator';
 import ReduxThunk from 'redux-thunk';
@@ -13,6 +13,7 @@ const store = createStore(authReducer, applyMiddleware(ReduxThunk));
 const App = () => {
   return (
     <SafeAreaView style={styles.screen}>
+      <StatusBar backgroundColor="#fff" />
       <Provider store={store}>
         <NavigationContainer>
           <ErrorBoundary>
