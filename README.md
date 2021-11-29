@@ -40,3 +40,6 @@ Created with: npx react-native init. Auth with swagger api and firebase api (wit
 ## Form management
 
 - formik
+- Pixel C API 29(Tablet), 2560x1800, Android 10
+
+Library for .env setup: react-native-dotenv
