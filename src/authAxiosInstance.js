@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const baseURL = 'https://site.ualegion.com/api/v1/';
+import {baseURL} from '@env';
 
 const authAxiosInstance = axios.create({
   baseURL,
